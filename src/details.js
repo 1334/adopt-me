@@ -8,19 +8,18 @@ const petfinder = pf({
 });
 
 class Details extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true
-    };
-  }
+  state = {
+    loading: true
+  };
 
   componentDidMount() {
     petfinder.pet
       .get({ output: 'full', id: this.props.id })
       .then(data => {
         const pet = data.petfinder.pet;
-        let breed = Array.isArray(pet.breed) ? pet.breed.join(', ') : pet.breed;
+        const breed = Array.isArray(pet.breeds.breed)
+          ? pet.breeds.breed.join(', ')
+          : pet.breeds.breed;
 
         this.setState({
           name: pet.name,
